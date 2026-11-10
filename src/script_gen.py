@@ -28,10 +28,10 @@ REGLAS:
 - Frases cortas y naturales para facilitar los subtítulos.
 - Sin emojis ni marcas de formato.
 - Incluye una CTA natural al final del vídeo.
-- Invita al espectador a suscribirse a Viral Void.
 - Añade una pregunta que anime a comentar.
 - La CTA debe ser breve, natural y relacionada con el tema.
 - No debe parecer publicidad ni interrumpir el ritmo.
+- No debes decir cosas que parezcan una orden al espectador.
 
 Devuelve JSON con esta forma exacta:
 {{
