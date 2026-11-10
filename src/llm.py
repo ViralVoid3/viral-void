@@ -12,7 +12,7 @@ def ask_json(prompt: str, retries: int = 3):
     global _client
     if _client is None:
         _client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
-    model = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+    model = os.getenv("GEMINI_MODEL", "gemini-3.8-flash")
     last = None
     for i in range(retries):
         try:
