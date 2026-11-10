@@ -56,6 +56,7 @@ def competition(yt, query: str):
         return []
 
 
+
 def choose_topic(history, yt=None):
     headlines = []
     for q in NEWS_QUERIES:
@@ -64,14 +65,30 @@ def choose_topic(history, yt=None):
     rising = rising_searches()
     recent = [h["topic"] for h in history[-30:]]
 
-    cands = ask_json(f"""Eres analista de mercado de un canal de YouTube de {NICHE}, en español.
+    raw_cands = ask_json(f"""Eres analista de mercado de un canal de YouTube de {NICHE}, en español.
 Titulares de las últimas 48 h:
 {json.dumps(headlines, ensure_ascii=False)}
 Búsquedas en alza: {json.dumps(rising, ensure_ascii=False)}
 Temas ya publicados (NO repetir): {json.dumps(recent, ensure_ascii=False)}
 
 Propón 5 temas de vídeo con alta demanda potencial. Devuelve JSON:
-{{"candidates":[{{"topic":"...","search_query":"consulta corta para buscar en YouTube"}}]}}""")["candidates"][:5]
+{{"candidates":[{{"topic":"...","search_query":"consulta corta para buscar en YouTube"}}]}}""")
+
+    # Acepta tanto {"candidates": [...]} como una lista directa.
+    if isinstance(raw_cands, dict):
+        cands = raw_cands.get("candidates", [])
+    elif isinstance(raw_cands, list):
+        cands = raw_cands
+    else:
+        raise ValueError("Gemini no ha devuelto una lista de candidatos válida.")
+
+    cands = [
+        c for c in cands
+        if isinstance(c, dict) and c.get("topic") and c.get("search_query")
+    ][:5]
+
+    if not cands:
+        raise ValueError("Gemini no ha devuelto candidatos con topic y search_query.")
 
     for c in cands:
         c["competition"] = competition(yt, c["search_query"])
@@ -85,5 +102,9 @@ Titulares de apoyo:
 Elige UN tema: mucha demanda y competencia débil, o con un ángulo diferenciador claro.
 Usa solo hechos que aparezcan en los titulares; no inventes datos.
 Devuelve JSON: {{"topic":"...","angle":"ángulo propio y diferenciador","why":"por qué ahora","key_facts":["hecho 1","hecho 2"]}}""")
+
+    if not isinstance(final, dict):
+        raise ValueError("Gemini no ha devuelto el tema final como objeto JSON.")
+
     final["headlines"] = headlines
     return final
