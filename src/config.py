@@ -1,28 +1,67 @@
-"""Configuración del canal. Edita aquí lo que quieras cambiar."""
 
-NICHE = "noticias y herramientas de inteligencia artificial explicadas fácil"
+"""Configuración del canal VIRAL VOID.
+Contenido optimizado para YouTube Shorts en español.
+"""
+
+# --------------------------------------------------
+# IDENTIDAD DEL CANAL
+# --------------------------------------------------
+
+NICHE = (
+    "curiosidades sorprendentes sobre inteligencia artificial, "
+    "herramientas de IA increíbles, novedades tecnológicas, "
+    "experimentos digitales y noticias virales de tecnología, "
+    "explicadas de forma sencilla, entretenida y sorprendente"
+)
+
 LANGUAGE = "es"
 
-# Voz gratuita de Microsoft Edge (España, masculina). Alternativas:
-# es-ES-ElviraNeural (femenina), es-MX-JorgeNeural (México)
+# --------------------------------------------------
+# LOCUCIÓN
+# --------------------------------------------------
+
+# Voz masculina española
 VOICE = "es-ES-AlvaroNeural"
-VOICE_RATE = "+5%"
 
-# Duración objetivo: ~150 palabras por minuto -> 900-1100 palabras = 6-7 min
-TARGET_WORDS = 1000
+# Un poco más rápida para mantener ritmo de Shorts
+VOICE_RATE = "+10%"
 
-# Búsquedas para detectar noticias y tendencias
+# --------------------------------------------------
+# DURACIÓN Y FORMATO
+# --------------------------------------------------
+
+# Objetivo aproximado: 45-60 segundos
+# 120 palabras a un ritmo de 150 palabras/minuto = 48 segundos
+TARGET_WORDS = 120
+
+# Formato vertical 9:16
+W, H = 1080, 1920
+
+# --------------------------------------------------
+# INVESTIGACIÓN DE TENDENCIAS
+# --------------------------------------------------
+
 NEWS_QUERIES = [
-    "inteligencia artificial",
+    "inteligencia artificial novedades",
+    "nuevas herramientas inteligencia artificial",
     "ChatGPT OR Gemini OR Claude",
-    "nueva herramienta IA",
+    "IA generativa aplicaciones sorprendentes",
+    "robots inteligencia artificial tecnología",
+    "experimentos inteligencia artificial",
 ]
 
-# Zona horaria de tu audiencia y hora por defecto (sin datos todavía)
+# --------------------------------------------------
+# PUBLICACIÓN
+# --------------------------------------------------
+
 TIMEZONE = "Europe/Madrid"
+
+# Hora recomendada inicial para probar
 DEFAULT_PUBLISH_HOUR = 18
 
-# Categoría de YouTube: 28 = Ciencia y tecnología
-CATEGORY_ID = "28"
+# --------------------------------------------------
+# YOUTUBE
+# --------------------------------------------------
 
-W, H = 1920, 1080
+# Categoría: Ciencia y tecnología
+CATEGORY_ID = "28"
